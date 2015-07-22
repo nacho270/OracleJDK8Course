@@ -55,7 +55,9 @@ public class Lesson2 {
         "The", "Quick", "BROWN", "Fox", "Jumped", "Over", "The", "LAZY", "DOG");
 
     /* YOUR CODE HERE */
-    List<String> list2 = list.stream().map(String::toLowerCase).collect(Collectors.toList());
+    List<String> list2 = list.stream()
+        .map(String::toLowerCase)
+        .collect(Collectors.toList());
     list2.forEach(System.out::println);
   }
 
@@ -70,6 +72,10 @@ public class Lesson2 {
         "The", "Quick", "BROWN", "Fox", "Jumped", "Over", "The", "LAZY", "DOG");
 
     /* YOUR CODE HERE */
+    List<String> list2 = list.stream()
+        .filter(s -> s.length() % 2 != 0)
+        .map(String::toLowerCase).collect(Collectors.toList());
+    list2.forEach(System.out::println);
   }
 
   /**
@@ -83,6 +89,10 @@ public class Lesson2 {
         "The", "quick", "brown", "fox", "jumped", "over", "the", "lazy", "dog");
 
     /* YOUR CODE HERE */
+    System.out.println(list.stream()
+        .skip(1)
+        .limit(3)
+        .collect(Collectors.joining("-")));
   }
 
   /**
