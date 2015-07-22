@@ -11,6 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -102,6 +103,7 @@ public class Lesson2 {
     try (BufferedReader reader = Files.newBufferedReader(
         Paths.get("SonnetI.txt"), StandardCharsets.UTF_8)) {
       /* YOUR CODE HERE */
+      System.out.println(reader.lines().count());
     }
   }
   
@@ -115,6 +117,13 @@ public class Lesson2 {
     try (BufferedReader reader = Files.newBufferedReader(
         Paths.get("SonnetI.txt"), StandardCharsets.UTF_8)) {
       /* YOUR CODE HERE */
+      
+      List<String> words = reader.lines()
+        .flatMap(l -> Stream.of(l.split(WORD_REGEXP)))
+        .filter(l -> l.length() > 0)
+        .distinct()
+        .collect(Collectors.toList());
+      words.forEach(System.out::println);
     }
   }
   
@@ -127,6 +136,14 @@ public class Lesson2 {
     try (BufferedReader reader = Files.newBufferedReader(
         Paths.get("SonnetI.txt"), StandardCharsets.UTF_8)) {
       /* YOUR CODE HERE */
+      List<String> words = reader.lines()
+          .flatMap(l -> Stream.of(l.split(WORD_REGEXP)))
+          .filter(l -> l.length() > 0)
+          .map(l -> l.toLowerCase())
+          .distinct()
+          .sorted()
+          .collect(Collectors.toList());
+      words.forEach(System.out::println);
     }
   }
   
@@ -137,6 +154,15 @@ public class Lesson2 {
     try (BufferedReader reader = Files.newBufferedReader(
         Paths.get("SonnetI.txt"), StandardCharsets.UTF_8)) {
       /* YOUR CODE HERE */
+      List<String> words = reader.lines()
+          .flatMap(l -> Stream.of(l.split(WORD_REGEXP)))
+          .filter(l -> l.length() > 0)
+          .map(l -> l.toLowerCase())
+          .distinct()
+          .sorted(Comparator.comparingInt(String::length)
+              .thenComparing(Comparator.naturalOrder()))
+          .collect(Collectors.toList());
+      words.forEach(System.out::println);
     }
   }
 
