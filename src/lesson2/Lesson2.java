@@ -55,6 +55,8 @@ public class Lesson2 {
         "The", "Quick", "BROWN", "Fox", "Jumped", "Over", "The", "LAZY", "DOG");
 
     /* YOUR CODE HERE */
+    List<String> list2 = list.stream().map(String::toLowerCase).collect(Collectors.toList());
+    list2.forEach(System.out::println);
   }
 
   /**
