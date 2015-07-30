@@ -8,6 +8,8 @@ package lesson3;
 import java.io.IOException;
 import java.util.List;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author Simon Ritter (@speakjava)
@@ -67,8 +69,6 @@ public class Lesson3 {
     final int LIST_SIZE = wordList.size();
     int[][] distances = new int[LIST_SIZE][LIST_SIZE];
     
-    // YOUR CODE HERE
-    
     return distances;
   }
   
@@ -80,9 +80,8 @@ public class Lesson3 {
    * @return The list processed in whatever way you want
    */
   static List<String> processWords(List<String> wordList, boolean parallel) {
-    // YOUR CODE HERE
-    
-    return null;
+    Stream<String> stream = wordList.stream();
+    return (parallel?stream.parallel() : stream.sequential()).map(s -> "nacho_" + s).collect(Collectors.toList());
   }
 
   /**
@@ -98,7 +97,7 @@ public class Lesson3 {
     measure("Sequential", () -> computeLevenshtein(wordList, false));
     measure("Parallel", () -> computeLevenshtein(wordList, true));
     
-//    measure("Sequential", () -> processWords(wordList, false));
-//    measure("Parallel", () -> processWords(wordList, true));
+    measure("Sequential", () -> processWords(wordList, false));
+    measure("Parallel", () -> processWords(wordList, true));
   }
 }
